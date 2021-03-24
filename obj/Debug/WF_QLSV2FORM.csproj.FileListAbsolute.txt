@@ -1,0 +1,11 @@
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\bin\Debug\WF_QLSV2FORM.exe.config
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\bin\Debug\WF_QLSV2FORM.exe
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\bin\Debug\WF_QLSV2FORM.pdb
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.csprojAssemblyReference.cache
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.DSSV.resources
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.Properties.Resources.resources
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.TTSV.resources
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.csproj.GenerateResource.cache
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.csproj.CoreCompileInputs.cache
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.exe
+D:\Download\Study\HOC\YEAR 2\HOCKY II\dotNet\WinForm\WF_QLSV2FORM\obj\Debug\WF_QLSV2FORM.pdb
