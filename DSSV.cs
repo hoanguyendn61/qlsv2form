@@ -18,15 +18,19 @@ namespace WF_QLSV2FORM
             InitializeComponent();
             SetCBBShow();
         }
+        public void Show(int ID_Lop, string Name)
+        {
+            dtgvDSSV.DataSource = CSDL_OOP.Instance.GetListSV(ID_Lop, Name);
+        }
         public void SetCBBShow()
         {
             cbLopSH.Items.Add(new CBBItem { Value = 0, Text = "All" });
-            foreach(DataRow i in CSDL.Instance.DTLSH.Rows)
+            foreach (LSH i in CSDL_OOP.Instance.GetAllLSH())
             {
                 cbLopSH.Items.Add(new CBBItem
                 {
-                    Value = Convert.ToInt32(i["ID_Lop"].ToString()),
-                    Text = i["TenLop"].ToString()
+                    Value = i.ID_Lop,
+                    Text = i.NameLop
                 });
             }
             cbLopSH.SelectedIndex = 0;
@@ -34,88 +38,57 @@ namespace WF_QLSV2FORM
         private void btnShow_Click(object sender, EventArgs e)
         {
             int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
-            dtgvDSSV.DataSource = CSDL.Instance.GetSVByIDLop(ID_Lop);
+            Show(ID_Lop, txtSearch.Text);
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             TTSV fTT = new TTSV();
-            fTT.Show();
+            fTT.ShowDialog();
+            Show(0, txtSearch.Text);
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            TTSV fTT = new TTSV();
             DataGridViewSelectedRowCollection data = dtgvDSSV.SelectedRows;
             if(data.Count == 1)
             {
-                fTT.Show();
                 string MSSV = data[0].Cells["MSSV"].Value.ToString();
-                DataRow row = CSDL.Instance.GetSVByMSSV(MSSV);
-                fTT.txtMSSV.Text = row["MSSV"].ToString();
-                fTT.txtName.Text = row["NameSV"].ToString();
-                fTT.dtpNS.Value = Convert.ToDateTime(row["NgaySinh"].ToString());
-                if (Convert.ToBoolean(row["Gender"].ToString()))
-                {
-                    fTT.rbM.Checked = true;
-                }
-                else
-                {
-                    fTT.rBF.Checked = true;
-                }
-                int idLop = Convert.ToInt32(row["ID_Lop"]);
-                fTT.cbLopSH.Text = ((CBBItem)fTT.cbLopSH.Items[idLop-1]).Text;
+                TTSV fTT = new TTSV(MSSV);
+                fTT.ShowDialog();
+                Show(0, txtSearch.Text);
             }
         }
-
         private void btnDel_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection data = dtgvDSSV.SelectedRows;
-            List<string> MSSV_del = new List<string>();
-            foreach (DataGridViewRow i in data)
+            if (data.Count == 1)
             {
-                MSSV_del.Add(i.Cells["MSSV"].Value.ToString());
+                string MSSV = data[0].Cells["MSSV"].Value.ToString();
+                SV s = CSDL_OOP.Instance.GetSVByMSSV(MSSV);
+                CSDL_OOP.Instance.DeleteSV(s);
             }
-            if (CSDL.Instance.Del(MSSV_del))
-            {
-                cbLopSH.SelectedIndex = 0;
-                int Lop = ((CBBItem)cbLopSH.Items[0]).Value;
-                dtgvDSSV.DataSource = CSDL.Instance.GetSVByIDLop(Lop);
-            }
-            else
-            {
-                MessageBox.Show("Error");
-            }
+            Show(0, txtSearch.Text);
         }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string searchValue = txtSearch.Text;
-            if (int.TryParse(searchValue, out _))
-            {
-                // Tìm bằng MSSV
-                dtgvDSSV.DataSource = CSDL.Instance.GetDTSVByMSSV(Convert.ToInt32(searchValue));
-            } else
-            {
-                // Tìm bằng tên (ghi đầy đủ họ, tên và viết hoa chữ cái đầu)
-                dtgvDSSV.DataSource = CSDL.Instance.GetDTSVByNameSV(searchValue);
-            }
-            txtSearch.Text = "";
+            int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
+            Show(ID_Lop, txtSearch.Text);
         }
-
         private void btnSort_Click(object sender, EventArgs e)
         {
+            int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
             switch (cbSort.Text)
             {
                 case "Tên, A->Z":
-                    dtgvDSSV.Sort(dtgvDSSV.Columns["NameSV"], ListSortDirection.Ascending);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_NameAZ);
                     break;
                 case "Tên, Z->A":
-                    dtgvDSSV.Sort(dtgvDSSV.Columns["NameSV"], ListSortDirection.Descending);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_NameZA);
                     break;
                 case "MSSV, Thấp -> Cao":
-                    dtgvDSSV.Sort(dtgvDSSV.Columns["MSSV"], ListSortDirection.Ascending);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVThapCao);
                     break;
                 case "MSSV, Cao -> Thấp":
-                    dtgvDSSV.Sort(dtgvDSSV.Columns["MSSV"], ListSortDirection.Descending);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVCaoThap);
                     break;
                 default:
                     break;

@@ -194,6 +194,7 @@ namespace WF_QLSV2FORM
             this.Controls.Add(this.grpTTSV);
             this.Name = "TTSV";
             this.Text = "TTSV";
+            this.TopMost = true;
             this.grpTTSV.ResumeLayout(false);
             this.grpTTSV.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -213,11 +214,11 @@ namespace WF_QLSV2FORM
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.TextBox txtMSSV;
-        public System.Windows.Forms.TextBox txtName;
-        public System.Windows.Forms.RadioButton rBF;
-        public System.Windows.Forms.RadioButton rbM;
-        public System.Windows.Forms.DateTimePicker dtpNS;
-        public System.Windows.Forms.ComboBox cbLopSH;
+        private System.Windows.Forms.TextBox txtMSSV;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.RadioButton rBF;
+        private System.Windows.Forms.RadioButton rbM;
+        private System.Windows.Forms.DateTimePicker dtpNS;
+        private System.Windows.Forms.ComboBox cbLopSH;
     }
 }

@@ -48,14 +48,17 @@
   <ItemGroup>
     <Compile Include="CBBItem.cs" />
     <Compile Include="CSDL.cs" />
+    <Compile Include="CSDL_OOP.cs" />
     <Compile Include="DSSV.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DSSV.Designer.cs">
       <DependentUpon>DSSV.cs</DependentUpon>
     </Compile>
+    <Compile Include="LSH.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SV.cs" />
     <Compile Include="TTSV.cs">
       <SubType>Form</SubType>
     </Compile>

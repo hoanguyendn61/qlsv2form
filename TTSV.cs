@@ -12,10 +12,41 @@ namespace WF_QLSV2FORM
 {
     public partial class TTSV : Form
     {
+        // Chua su dung duoc delegate
+        public delegate void MyDel(int id, string ms);
+        public MyDel d { get; set; }
+
+        public string MSSV { get; set; }
         public TTSV()
         {
             InitializeComponent();
             LoadLopSH();
+        }
+        public TTSV(string ms)
+        {
+            InitializeComponent();
+            LoadLopSH();
+            SetGUI(ms);
+            txtMSSV.Enabled = false;
+        }
+        public void SetGUI(string ms)
+        {
+            if(CSDL_OOP.Instance.GetSVByMSSV(ms) != null)
+            {
+                // Binding
+                SV s = CSDL_OOP.Instance.GetSVByMSSV(ms);
+                txtMSSV.Text = s.MSSV;
+                txtName.Text = s.NameSV;
+                dtpNS.Value = s.NgaySinh;
+                if(s.Gender == true)
+                {
+                    rbM.Checked = true;
+                } else
+                {
+                    rBF.Checked = true;
+                }
+                cbLopSH.Text = ((CBBItem)cbLopSH.Items[s.ID_Lop - 1]).Text;
+            }
         }
         public void LoadLopSH()
         {
@@ -31,9 +62,8 @@ namespace WF_QLSV2FORM
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Dispose();
         }
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             string MSSV = txtMSSV.Text;
@@ -41,17 +71,9 @@ namespace WF_QLSV2FORM
             bool Gender = rbM.Checked;
             DateTime BD = Convert.ToDateTime(dtpNS.Value);
             int LopSH = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
-            if (CSDL.Instance.Add(MSSV, NameSV, Gender, BD, LopSH))
-            {
-                MessageBox.Show("Thêm SV thành công");
-            }
-            else if (CSDL.Instance.Edit(MSSV, NameSV, Gender, BD, LopSH))
-            {
-                MessageBox.Show("Edit SV thành công");
-            } else
-            {
-                MessageBox.Show("Error");
-            }
+            SV s = new SV(MSSV, NameSV, Gender, BD, LopSH);
+            CSDL_OOP.Instance.ExecuteDB(s);
+            this.Dispose();
         }
     }
 }

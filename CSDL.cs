@@ -259,8 +259,52 @@ namespace WF_QLSV2FORM
             {
                 return false;
             }
+        } 
+        /// KIEU MOI
+        public void AddDataRow(SV s) 
+        {
+            DataRow dr = DTSV.NewRow();
+            dr["MSSV"] = s.MSSV; dr["NameSV"] = s.NameSV;
+            dr["Gender"] = s.Gender; dr["ID_Lop"] = s.ID_Lop;
+            dr["NgaySinh"] = s.NgaySinh;
+            DTSV.Rows.Add(dr);
         }
-
+        public void EditDataRow(SV s) 
+        {
+            try
+            {
+                foreach (DataRow i in DTSV.Rows)
+                {
+                    if (i["MSSV"].ToString() == s.MSSV)
+                    {
+                        i["NameSV"] = s.NameSV;
+                        i["Gender"] = s.Gender;
+                        i["NgaySinh"] = s.NgaySinh;
+                        i["ID_Lop"] = s.ID_Lop;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        public void RemoveDataRow(SV s)
+        {
+            try
+            {
+                foreach (DataRow i in DTSV.Rows)
+                {
+                    if (i["MSSV"].ToString() == s.MSSV)
+                    {
+                        DTSV.Rows.Remove(i);
+                    }
+                }
+                DTSV.AcceptChanges();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 
 }
