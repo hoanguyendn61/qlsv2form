@@ -37,14 +37,14 @@ namespace WF_QLSV2FORM
         }
         private void btnShow_Click(object sender, EventArgs e)
         {
-            int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
-            Show(ID_Lop, txtSearch.Text);
+           // int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
+            Show(((CBBItem)cbLopSH.SelectedItem).Value, txtSearch.Text);
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            TTSV fTT = new TTSV();
+            TTSV fTT = new TTSV(null);
+            fTT.d = new TTSV.MyDel(this.Show);
             fTT.ShowDialog();
-            Show(0, txtSearch.Text);
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -53,8 +53,8 @@ namespace WF_QLSV2FORM
             {
                 string MSSV = data[0].Cells["MSSV"].Value.ToString();
                 TTSV fTT = new TTSV(MSSV);
+                fTT.d = new TTSV.MyDel(this.Show);
                 fTT.ShowDialog();
-                Show(0, txtSearch.Text);
             }
         }
         private void btnDel_Click(object sender, EventArgs e)
@@ -70,8 +70,7 @@ namespace WF_QLSV2FORM
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
-            Show(ID_Lop, txtSearch.Text);
+            Show(((CBBItem)cbLopSH.SelectedItem).Value, txtSearch.Text);
         }
         private void btnSort_Click(object sender, EventArgs e)
         {
@@ -85,10 +84,10 @@ namespace WF_QLSV2FORM
                     dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_NameZA);
                     break;
                 case "MSSV, Thấp -> Cao":
-                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVThapCao);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVAscending);
                     break;
                 case "MSSV, Cao -> Thấp":
-                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVCaoThap);
+                    dtgvDSSV.DataSource = CSDL_OOP.Instance.Sort(ID_Lop, txtSearch.Text, SV.Compare_MSSVDescending);
                     break;
                 default:
                     break;

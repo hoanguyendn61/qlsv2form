@@ -23,11 +23,11 @@ namespace WF_QLSV2FORM
             NgaySinh = ns;
             ID_Lop = id;
         }
-        public static bool Compare_MSSVCaoThap(object o1, object o2)
+        public static bool Compare_MSSVDescending(object o1, object o2)
         {
             return Convert.ToInt32(((SV)o1).MSSV) < Convert.ToInt32(((SV)o2).MSSV);
         }
-        public static bool Compare_MSSVThapCao(object o1, object o2)
+        public static bool Compare_MSSVAscending(object o1, object o2)
         {
             return Convert.ToInt32(((SV)o1).MSSV) > Convert.ToInt32(((SV)o2).MSSV);
         }

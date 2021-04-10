@@ -110,7 +110,6 @@ namespace WF_QLSV2FORM
         public void ExecuteDB(SV s)
         {
             bool check = false;
-            // CRUD
             foreach(SV i in GetAllSV())
             {
                 if (i.MSSV == s.MSSV)
@@ -147,7 +146,7 @@ namespace WF_QLSV2FORM
         }
         public void DeleteSV(SV s)
         {
-            CSDL.Instance.RemoveDataRow(s);
+            CSDL.Instance.DeleteDataRow(s);
         }
         public SV GetSVByMSSV(string ms)
         {

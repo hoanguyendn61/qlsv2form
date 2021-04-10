@@ -12,29 +12,32 @@ namespace WF_QLSV2FORM
 {
     public partial class TTSV : Form
     {
-        // Chua su dung duoc delegate
         public delegate void MyDel(int id, string ms);
         public MyDel d { get; set; }
 
         public string MSSV { get; set; }
-        public TTSV()
+        /*public TTSV()
         {
             InitializeComponent();
             LoadLopSH();
-        }
+        }*/
         public TTSV(string ms)
         {
             InitializeComponent();
-            LoadLopSH();
-            SetGUI(ms);
-            txtMSSV.Enabled = false;
+            LoadLopSHCBB();
+            if (ms != null)
+            {
+                MSSV = ms;
+                SetGUI();
+                txtMSSV.Enabled = false;
+            }
         }
-        public void SetGUI(string ms)
+        public void SetGUI()
         {
-            if(CSDL_OOP.Instance.GetSVByMSSV(ms) != null)
+            if(CSDL_OOP.Instance.GetSVByMSSV(MSSV) != null)
             {
                 // Binding
-                SV s = CSDL_OOP.Instance.GetSVByMSSV(ms);
+                SV s = CSDL_OOP.Instance.GetSVByMSSV(MSSV);
                 txtMSSV.Text = s.MSSV;
                 txtName.Text = s.NameSV;
                 dtpNS.Value = s.NgaySinh;
@@ -48,7 +51,7 @@ namespace WF_QLSV2FORM
                 cbLopSH.Text = ((CBBItem)cbLopSH.Items[s.ID_Lop - 1]).Text;
             }
         }
-        public void LoadLopSH()
+        public void LoadLopSHCBB()
         {
             foreach (DataRow i in CSDL.Instance.DTLSH.Rows)
             {
@@ -73,6 +76,7 @@ namespace WF_QLSV2FORM
             int LopSH = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
             SV s = new SV(MSSV, NameSV, Gender, BD, LopSH);
             CSDL_OOP.Instance.ExecuteDB(s);
+            d(0, "");
             this.Dispose();
         }
     }

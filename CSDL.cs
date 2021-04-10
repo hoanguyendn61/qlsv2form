@@ -68,6 +68,7 @@ namespace WF_QLSV2FORM
             dr4["ID_Lop"] = 2; dr4["TenLop"] = "LSH2";
             DTLSH.Rows.Add(dr4);
         }
+        /*
         // Trả về DataTable có SV trùng với ID_Lop
         public DataTable GetSVByIDLop(int id)
         {
@@ -260,6 +261,7 @@ namespace WF_QLSV2FORM
                 return false;
             }
         } 
+        */
         /// KIEU MOI
         public void AddDataRow(SV s) 
         {
@@ -288,7 +290,7 @@ namespace WF_QLSV2FORM
             {
             }
         }
-        public void RemoveDataRow(SV s)
+        public void DeleteDataRow(SV s)
         {
             try
             {
