@@ -37,7 +37,6 @@ namespace WF_QLSV2FORM
         }
         private void btnShow_Click(object sender, EventArgs e)
         {
-           // int ID_Lop = ((CBBItem)cbLopSH.Items[cbLopSH.SelectedIndex]).Value;
             Show(((CBBItem)cbLopSH.SelectedItem).Value, txtSearch.Text);
         }
         private void btnAdd_Click(object sender, EventArgs e)
